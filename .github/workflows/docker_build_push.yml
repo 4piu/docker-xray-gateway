@@ -1,12 +1,14 @@
 name: Build and Publish to DockerHub
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       xray_version:
         required: true
+        description: version number, eg. 1.2.3
+      set_latest:
+        type: boolean
+        description: set this version as latest tag
 
 env:
   XRAY_VERSION: ${{ github.event.inputs.xray_version || github.ref_name }}
@@ -42,7 +44,7 @@ jobs:
         with:
           build-args: |
             XRAY_VERSION=${{ env.XRAY_VERSION }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/xray-gateway:${{ env.XRAY_VERSION }}
+          tags: ${{ format(github.event.inputs.set_latest && '{0}/xray-gateway:{1},{0}/xray-gateway:latest' || '{0}/xray-gateway:{1}', secrets.DOCKERHUB_USERNAME, env.XRAY_VERSION) }}
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           push: true
           cache-from: type=gha,scope=${{ github.workflow }}
