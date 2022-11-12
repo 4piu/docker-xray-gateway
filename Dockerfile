@@ -1,3 +1,5 @@
+ARG XRAY_VERSION
+
 FROM teddysun/xray:$XRAY_VERSION
 
 WORKDIR /root

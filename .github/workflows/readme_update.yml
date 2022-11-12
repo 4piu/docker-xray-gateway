@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update_dockerhub_readme:
+  update-dockerHub-readme:
     name: Push README to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +18,7 @@ jobs:
       - name: Dockerhub Readme
         uses: ms-jpq/sync-dockerhub-readme@v1
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-          repository: ${{ secrets.DOCKER_USERNAME }}/xray-gateway
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/xray-gateway
           readme: "./README.md"
