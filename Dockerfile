@@ -1,15 +1,7 @@
-FROM --platform=${TARGETPLATFORM} alpine:latest
-
-ARG TARGETPLATFORM
+FROM teddysun/xray:$XRAY_VERSION
 
 WORKDIR /root
-COPY start.sh install.sh ./
-
-RUN apk update \
-    && apk add --no-cache iptables \
-    && mkdir -p /usr/local/share/xray/ \
-    && ./install.sh "${TARGETPLATFORM}" \
-    && rm ./install.sh
+COPY start.sh .
 
 ENV TPROXY_PORT 12345
     
