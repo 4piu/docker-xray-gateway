@@ -69,6 +69,6 @@ docker network rm macvlan
 
 ## Example configuration
 
-[Example configuration](https://xtls.github.io/documents/level-2/tproxy/)
+[Example configuration](https://xtls.github.io/document/level-2/tproxy.html)
 
-In your configuration, set mark=2 in [SockoptObject](https://www.v2ray.com/chapter_02/05_transport.html#sockoptobject) for all outbound traffic or it will be looped back. 
+In your configuration, set mark=255 (0xff) in [SockoptObject](https://www.v2ray.com/chapter_02/05_transport.html#sockoptobject) for all outbound traffic. 
